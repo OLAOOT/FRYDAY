@@ -3,17 +3,16 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
 const StyledLogo = styled.div`
-  color: ${props => props.theme.color[props.color] || props.theme.color.primary};
+  color: ${props => props.theme.color[props.color] || props.theme.color.black};
   font-size: 48px;
-  font-family: ${({ theme }) => theme.font.medium};
+  font-weight: ${({ theme }) => theme.font.bold};
 `
 const Logo = ({ color }) => (
   <Link to="/" style={{textDecoration: 'none'}}>
     <StyledLogo color={color}>
-      logo
+      FRYDAY
     </StyledLogo>
   </Link>
 )
-
 
 export default Logo

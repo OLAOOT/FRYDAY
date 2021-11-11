@@ -1,6 +1,6 @@
-import * as React from "react"
+import React from "react"
 import styled from "styled-components"
-import Logo from "../elements/Logo"
+import Logo from "./Logo"
 
 const Container = styled.div`
   display: flex;
@@ -8,7 +8,8 @@ const Container = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100vw;
-  margin-bottom: 64px;
+  height: 128px;
+  background-color: ${props => props.theme.color.headerbrown};
 `;
 
 const HeaderContainer = styled.div`
@@ -29,8 +30,7 @@ const TextContainer = styled.div`
   align-items: center;
   & > * {
     font-size: 24px;
-    font-weight: ${props => props.theme.font.light};
-    color: ${props => props.theme.color.lightbrown};
+    color: ${props => props.theme.color.black};
   }
 `;
 
