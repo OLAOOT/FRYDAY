@@ -7,7 +7,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   width: 100vw;
-  height: 192px;
+  height: 180px;
   margin-bottom: 64px;
   background-color: ${props => props.theme.color.headerbrown};
   box-shadow: ${props => props.theme.shadow.bottom};
@@ -31,7 +31,6 @@ const TextContainer = styled.div`
   justify-content: center;
   align-items: center;
   & > * {
-    margin: 0;
     font-size: 28px;
     font-weight: ${(props) => props.theme.font.light};
     color: ${(props) => props.theme.color.lightbrown};

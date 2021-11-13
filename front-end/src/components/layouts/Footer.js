@@ -2,14 +2,12 @@ import React from 'react'
 import styled from 'styled-components'
 
 const Container = styled.div`
-	position: absolute;
-	bottom: 0;
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
 	align-items: center;
 	width: 100%;
-	height: 160px;
+	height: 128px;
 	background-color: ${props => props.theme.color.footerbrown};
 	padding: 16px;
 	& > div {
@@ -23,7 +21,7 @@ const TextContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	margin: 8px 0 16px;
+	margin: 16px 0;
 	& > h5:first-child {
 		color: ${props => props.theme.color.brown};
 		font-size: 14px;

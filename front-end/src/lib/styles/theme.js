@@ -37,7 +37,7 @@ const font = {
 
 const shadow = {
   default: "0px 4px 10px #00000029",
-  bottom: "0px 4px 10px -6px #00000029"
+  bottom: "0px 10px 10px -6px #00000029"
 }
 
 const theme = {
