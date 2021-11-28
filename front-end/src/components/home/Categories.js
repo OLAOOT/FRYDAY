@@ -63,27 +63,27 @@ const Categories = () => {
       </HeaderContainer>
       <CardOuterContainer>
         <CardContainer>
-          <CategoryCard color="yellow" href="/category?id=yellow">
+          <CategoryCard color="yellow" href="/category?id=bread">
             <Icon src="/icon-toast.svg" background="yellow" />
             <h4>빵 · 토스트</h4>
           </CategoryCard>
-          <CategoryCard color="orange" href="/category?id=orange">
+          <CategoryCard color="orange" href="/category?id=snack">
             <Icon src="/icon-cookie.svg" background="orange" />
             <h4>과자 · 스낵</h4>
           </CategoryCard>
-          <CategoryCard color="green" href="/category?id=green">
+          <CategoryCard color="green" href="/category?id=vegetable">
             <Icon src="/icon-carrot.svg" background="green" />
             <h4>야채 · 샐러드</h4>
           </CategoryCard>
-          <CategoryCard color="blue" href="/category?id=blue">
+          <CategoryCard color="blue" href="/category?id=frozen">
             <Icon src="/icon-fridge.svg" background="blue" />
             <h4>냉동 · 냉장</h4>
           </CategoryCard>
-          <CategoryCard color="red" href="/category?id=red">
+          <CategoryCard color="red" href="/category?id=meat">
             <Icon src="/icon-steak.svg" background="red" />
             <h4>고기 · 육류</h4>
           </CategoryCard>
-          <CategoryCard color="pink" href="/category?id=pink">
+          <CategoryCard color="pink" href="/category?id=chicken">
             <Icon src="/icon-chicken.svg" background="pink" />
             <h4>닭 · 해산물</h4>
           </CategoryCard>

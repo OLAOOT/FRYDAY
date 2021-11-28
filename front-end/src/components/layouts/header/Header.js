@@ -1,6 +1,7 @@
 import React from "react"
 import styled from "styled-components"
 import Logo from "./Logo"
+import { Link } from 'react-router-dom'
 
 const Container = styled.div`
   display: flex;
@@ -34,13 +35,18 @@ const TextContainer = styled.div`
   }
 `;
 
+const Login = styled(Link)`
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+`
+
 export default function Header() {
   return (
     <Container>
       <HeaderContainer>
         <Logo />
         <TextContainer>
-          <div>Login</div>
+          <Login to='/login'>Login</Login>
         </TextContainer>
       </HeaderContainer>
     </Container>
