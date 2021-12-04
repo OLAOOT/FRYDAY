@@ -40,6 +40,11 @@ const Notice = styled.div`
   margin: 16px;
 `
 
+const CheckButtonContainer = styled.div`
+  width: 100%;
+  text-align: center;
+`
+
 const SignUp = () => {
 
     const [id,setId] = useState('');
@@ -153,7 +158,9 @@ const SignUp = () => {
           <InputContainer>
             <label htmlFor="user-id">ID</label>
             <Input name="user-id" value={id} placeholder="ID" required onChange={onChangeId} />
-            <Button onClick={handleCheckId} width="150px">중복 확인</Button>
+            <CheckButtonContainer>
+              <Button onClick={handleCheckId} width="150px">중복 확인</Button>
+            </CheckButtonContainer>
             <Notice>{checkId}</Notice>
           </InputContainer>
           <InputContainer>
@@ -169,7 +176,9 @@ const SignUp = () => {
           <InputContainer>
             <label htmlFor="user-name">닉네임</label>
             <Input name="user-name" value={name} placeholder="닉네임" required onChange={onChangeName} />
-            <Button onClick={handleCheckName} width="150px">중복 확인</Button>
+            <CheckButtonContainer>
+              <Button onClick={handleCheckName} width="150px">중복 확인</Button>
+            </CheckButtonContainer>
             <Notice>{checkName}</Notice>
           </InputContainer>
           <Button htmlType="submit" background={checkSignUp ? 'brown' : 'headerbrown'} onClick={onSubmit}>가입하기</Button>

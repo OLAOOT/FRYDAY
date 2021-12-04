@@ -12,7 +12,7 @@ const Container = styled.div`
 `;
 
 const CategoryList = ({
-  recipes, //id, name, like, comment
+  recipes, //id, name, author, like, comment
   color,
 }) => {
   if (recipes === undefined) {
@@ -26,6 +26,7 @@ const CategoryList = ({
           href={"/recipe?id=" + recipe.id}
           key={recipe.name}
           name={recipe.name}
+          author={recipe.author}
           like={recipe.like}
           comment={recipe.comment}
           color={color}

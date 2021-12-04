@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import SectionHeader from "./elements/SectionHeader";
@@ -36,18 +37,22 @@ const CardContainer = styled.div`
   margin: 16px 0 32px;
 `;
 
-const ProposeRecipeButton = styled.div`
+const ProposeRecipeButton = styled.button`
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
   color: ${(props) => props.theme.color.brown};
-  font-size: 14px;
+  font-size: 18px;
   margin-left: 16px;
   white-space: nowrap !important;
 `;
 
 const Categories = () => {
+  
+  const navigate = useNavigate()
+
   const onClickProposeRecipeButton = () => {
-    alert("temp");
+    // 로그인 했다면
+    navigate('/write')
   };
 
   return (
@@ -58,7 +63,7 @@ const Categories = () => {
           <h4>어떤걸 만들어볼까?</h4>
         </SectionHeader>
         <ProposeRecipeButton onClick={onClickProposeRecipeButton}>
-          레시피 제안하기
+          레시피 등록하기
         </ProposeRecipeButton>
       </HeaderContainer>
       <CardOuterContainer>

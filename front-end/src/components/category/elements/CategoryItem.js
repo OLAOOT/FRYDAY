@@ -36,36 +36,51 @@ const DataOuterContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 170px;
+  width: 200px;
   height: 100%;
   padding: 16px;
   border: 1px solid ${(props) => props.theme.color[props.color]};
   border-radius: 10px;
+  & > * + * {
+    margin-left: 8px;
+  }
 `;
+
+const LikeCommentContainer = styled.div`
+  display: flex;
+  align-items: center;
+  & > * + * {
+    margin-left: 8px;
+  }
+`
 
 const DataInnerContainer = styled.div`
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 0 12px;
   & > *:first-child {
-    width: 18px;
-    height: 18px;
-    margin-right: 6px;
+    width: 12px;
+    height: 12px;
+    margin-right: 4px;
     & > * {
-      width: 18px;
-      height: 18px;
+      width: 12px;
+      height: 12px;
     }
   }
   & > div {
-    font-size: 17px;
+    font-size: 12px;
     color: ${(props) => props.theme.color[props.color]};
   }
 `;
 
+const Author = styled.div`
+  font-size: 12px;
+  color: ${(props) => props.theme.color[props.color]};
+`
+
 const CategoryItem = ({
   href,
   name,
+  author,
   like,
   comment,
   color,
@@ -74,14 +89,17 @@ const CategoryItem = ({
     // <Link to={href} color={color} focused={color}>
       <Container to={href} color={color} focused={color}>
         <DataOuterContainer color={color}>
-          <DataInnerContainer color={color}>
-            <HeartIcon color={theme.color[color]} />
-            <div>{like}</div>
-          </DataInnerContainer>
-          <DataInnerContainer color={color}>
-            <CommentIcon color={theme.color[color]} />
-            <div>{comment}</div>
-          </DataInnerContainer>
+          <LikeCommentContainer>
+            <DataInnerContainer color={color}>
+              <HeartIcon color={theme.color[color]} />
+              <div>{like}</div>
+            </DataInnerContainer>
+            <DataInnerContainer color={color}>
+              <CommentIcon color={theme.color[color]} />
+              <div>{comment}</div>
+            </DataInnerContainer>
+          </LikeCommentContainer>
+          <Author color={color}>{author}</Author>
         </DataOuterContainer>
         <h4>{name}</h4>
       </Container>

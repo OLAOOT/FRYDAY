@@ -13,6 +13,7 @@ import Category from './pages/Category'
 import Recipe from './pages/Recipe'
 import Login from './pages/Login'
 import SignUp from './pages/SignUp'
+import Write from './pages/Write'
 
 export const LoginContext = createContext({
   ID: '',
@@ -47,6 +48,7 @@ export default function App() {
             <Route exact path='/recipe' element={<Recipe />} />
             <Route exact path='/login' element={<Login />} />
             <Route exact path='/signup' element={<SignUp />} />
+            <Route exact path='/write' element={<Write />} />
           </Routes>
           <Footer />
         </Router>

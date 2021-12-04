@@ -73,6 +73,7 @@ const dummy = [
     name: '알감자버터구이',
     iconSrc: '/icon-carrot.svg',
     color: 'green',
+    author: '이승우',
     like: 999,
     comment: 99
   }, {
@@ -80,6 +81,7 @@ const dummy = [
     name: '감자칩',
     iconSrc: '/icon-cookie.svg',
     color: 'orange',
+    author: '이승우',
     like: 999,
     comment: 99
   }, {
@@ -87,6 +89,7 @@ const dummy = [
     name: '치킨너겟',
     iconSrc: '/icon-chicken.svg',
     color: 'pink',
+    author: '이승우',
     like: 999,
     comment: 99
   }, {
@@ -94,6 +97,7 @@ const dummy = [
     name: '새우튀김',
     iconSrc: '/icon-chicken.svg',
     color: 'pink',
+    author: '이승우',
     like: 999,
     comment: 99
   }, {
@@ -101,6 +105,7 @@ const dummy = [
     name: '군고구마',
     iconSrc: '/icon-carrot.svg',
     color: 'green',
+    author: '이승우',
     like: 999,
     comment: 99
   }
@@ -188,6 +193,7 @@ const TrendCards = () => {
             name={recipe.name}
             iconSrc={recipe.iconSrc}
             color={recipe.color}
+            author={recipe.author}
             like={recipe.like}
             comment={recipe.comment}
           />

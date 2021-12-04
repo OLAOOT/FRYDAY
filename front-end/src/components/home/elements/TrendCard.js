@@ -46,11 +46,11 @@ const Container = styled.div`
 
 const DataOuterContainer = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   width: 100%;
   height: 26px;
-  padding: 0 16px 0 100px;
+  padding: 0 16px 0 0px;
   border-radius: 16px;
   background-color: ${(props) => props.theme.background[props.color]};
 `;
@@ -62,6 +62,7 @@ const DataInnerContainer = styled.div`
   & > *:first-child {
     width: 12px;
     margin-right: 4px;
+    margin-left: 8px;
     & > * {
       width: 12px;
     }
@@ -72,11 +73,18 @@ const DataInnerContainer = styled.div`
   }
 `;
 
+const Author = styled.div`
+  font-size: 12px;
+  color: ${(props) => props.theme.color[props.color]};
+  margin-left: 16px;
+`
+
 const TrendCard = ({
   id,
   name,
   iconSrc,
   color,
+  author,
   like,
   comment,
 }) => {
@@ -97,6 +105,7 @@ const TrendCard = ({
             <CommentIcon color={theme.color[color]} />
             <div>{comment}</div>
           </DataInnerContainer>
+          <Author color={color}>{author}</Author>
         </DataOuterContainer>
       </Container>
     </Link>

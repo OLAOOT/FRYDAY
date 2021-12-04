@@ -4,9 +4,10 @@ import { useLocation } from 'react-router-dom'
 import queryString from "query-string"
 
 import RecipeTitle from '../components/recipe/RecipeTitle'
-import RecipeList from '../components/recipe/RecipeList';
-import FYI from '../components/recipe/FYI'
+import RecipeList from '../components/recipe/RecipeList'
+import FYI from '../components/recipe/elements/FYI'
 import { categories } from '../lib/data'
+import Comments from '../components/recipe/Comments'
 
 const Container = styled.div`
   display: flex;
@@ -26,8 +27,10 @@ const ContentsContainer = styled.div`
   }
 `;
 
+
 const dummy = {
   id: 'zz1',
+  author: '이승우',
   category: 'bread',
   name: '호빵',
   like: 999,
@@ -38,8 +41,14 @@ const dummy = {
   ],
   fyi: '뜨거울 수 있으니 잡을 때 조심하세요!',
   comment: [
-    '너무 맛있어요~',
-    '완전 꿀팁이네요!'
+    {
+      author: '이승우',
+      comment: '너무 맛있어요~'
+    },
+    {
+      author: '송정헌',
+      comment: '완전 꿀팁이네요!'
+    },
   ]
 }
 
@@ -56,10 +65,12 @@ const Recipe = () => {
             name={recipe.name}
             iconSrc={category.iconSrc}
             color={category.color}
+            author={recipe.author}
             like={recipe.like}
           />
           <RecipeList recipe={recipe.list} color={category.color} />
           <FYI fyi={recipe.fyi} color={category.color} />
+          <Comments color={category.color} comment={recipe.comment} />
         </ContentsContainer>
       )}
     </Container>
