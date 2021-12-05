@@ -64,11 +64,10 @@ const Category = () => {
       <ContentsContainer>
         <CategoryTitle
           name={category.name}
-          author={category.author}
           iconSrc={category.iconSrc}
           color={category.color}
         />
-        <CategoryList recipes={dummy} color={category.color} />
+        <CategoryList category={category.name} color={category.color} />
       </ContentsContainer>
     </Container>
   );

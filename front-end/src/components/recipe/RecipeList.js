@@ -18,7 +18,7 @@ const RecipeList = ({
 }) => {
   return (
     <Container>
-      {recipe.map((step, index) => (
+      {recipe && recipe.map((step, index) => (
         <RecipeItem key={step} step={step} index={index + 1} color={color} />
       ))}
     </Container>

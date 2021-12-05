@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useLocation } from 'react-router-dom'
 import queryString from "query-string"
@@ -8,6 +8,7 @@ import RecipeList from '../components/recipe/RecipeList'
 import FYI from '../components/recipe/elements/FYI'
 import { categories } from '../lib/data'
 import Comments from '../components/recipe/Comments'
+import axios from "axios";
 
 const Container = styled.div`
   display: flex;
@@ -52,25 +53,61 @@ const dummy = {
   ]
 }
 
+const iconSrcArr = ['icon-toast.svg', 'icon-cookie.svg', 'icon-carrot.svg', 
+              'icon-fridge.svg', 'icon-steak.svg', 'icon-chicken.svg']
+
+const colorArr = ['yellow', 'orange', 'green', 'blue', 'red', 'pink']
+
+const getIconSrc = category => iconSrcArr[category - 1]
+const getColor = category => colorArr[category - 1]
+
 const Recipe = () => {
 
-  const [recipe, setRecipe] = useState(dummy)
-  const category = categories.find(c => c.id === recipe.category)
+  const [recipe, setRecipe] = useState([])
+  const [contents, setContents] = useState([])
+  const [comment, setComment] = useState([])
+  const [commentFlag, setCommentFlag] = useState(false)
+
+  const location = useLocation()
+  const id = queryString.parse(location.search).id
+
+  const getData = async () => {
+    const { data } = await axios.get(`/recipe/${id}`)
+    setRecipe(data[0])
+    setContents(data[0].contents.split('\r\n'))
+
+    const {data: commentData} = await axios.get(`/comment/${id}`)
+    setComment(commentData)
+  }
+
+  const getCommentData = async () => {
+    const {data: commentData} = await axios.get(`/comment/${id}`)
+    setComment(commentData)
+  }
+
+  useEffect(() => {
+    getData()
+  }, [])
+
+  useEffect(() => {
+    getCommentData()
+    setCommentFlag(false)
+  }, [commentFlag])
 
   return (
     <Container>
-      {recipe && (
+      {comment && (
         <ContentsContainer>
           <RecipeTitle
-            name={recipe.name}
-            iconSrc={category.iconSrc}
-            color={category.color}
+            name={recipe.post_title}
+            iconSrc={getIconSrc(recipe.category_id)}
+            color={getColor(recipe.category_id)}
             author={recipe.author}
-            like={recipe.like}
+            like={recipe.likes}
           />
-          <RecipeList recipe={recipe.list} color={category.color} />
-          <FYI fyi={recipe.fyi} color={category.color} />
-          <Comments color={category.color} comment={recipe.comment} />
+          <RecipeList recipe={contents} color={getColor(recipe.category_id)} />
+          <FYI fyi={recipe.post_fyi} color={getColor(recipe.category_id)} />
+          <Comments color={getColor(recipe.category_id)} id={id} comment={comment} setCommentFlag={setCommentFlag} />
         </ContentsContainer>
       )}
     </Container>

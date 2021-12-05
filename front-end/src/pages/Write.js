@@ -6,6 +6,7 @@ import Button from '../components/elements/Button'
 import Input from '../components/elements/Input'
 import CategoryCard from '../components/write/elements/CategoryCard'
 import Icon from '../components/elements/Icon'
+import axios from 'axios'
 
 const Container = styled.div`
   display: flex;
@@ -90,7 +91,16 @@ const Write = () => {
         if (name.length === 0 || category.length === 0 || recipe.some(e => e.length === 0)) {
           alert('필수 정보를 입력하지 않았습니다.')
         } else {
-          alert('등록')
+          console.log('before')
+          const { data } = await axios.post('/recipe', {
+            title: name,
+            id: 10,
+            category: category,
+            post_fyi: FYI,
+            content: recipe.join('\r\n')
+          })
+
+          console.log(data)
         }
     };
     
@@ -123,29 +133,29 @@ const Write = () => {
           <InputContainer>
             <label>카테고리</label>
             <CategoryCardContainer>
-              <CategoryCard active={category === 'bread'} color="yellow" category='bread' setCategory={setCategory}>
+              <CategoryCard active={category === 1} color="yellow" category={1} setCategory={setCategory}>
                 <Icon src="/icon-toast.svg" background="yellow" />
                 <h4>빵 · 토스트</h4>
               </CategoryCard>
-              <CategoryCard active={category === 'snack'} color="orange" category='snack' setCategory={setCategory}>
+              <CategoryCard active={category === 2} color="orange" category={2} setCategory={setCategory}>
                 <Icon src="/icon-cookie.svg" background="orange" />
                 <h4>과자 · 스낵</h4>
               </CategoryCard>
-              <CategoryCard active={category === 'vegetable'} color="green" category='vegetable' setCategory={setCategory}>
+              <CategoryCard active={category === 3} color="green" category={3} setCategory={setCategory}>
                 <Icon src="/icon-carrot.svg" background="green" />
                 <h4>야채 · 샐러드</h4>
               </CategoryCard>
             </CategoryCardContainer>
             <CategoryCardContainer>
-              <CategoryCard active={category === 'frozen'} color="blue" category='frozen' setCategory={setCategory}>
+              <CategoryCard active={category === 4} color="blue" category={4} setCategory={setCategory}>
                 <Icon src="/icon-fridge.svg" background="blue" />
                 <h4>냉동 · 냉장</h4>
               </CategoryCard>
-              <CategoryCard active={category === 'meat'} color="red" category='meat' setCategory={setCategory}>
+              <CategoryCard active={category === 5} color="red" category={5} setCategory={setCategory}>
                 <Icon src="/icon-steak.svg" background="red" />
                 <h4>고기 · 육류</h4>
               </CategoryCard>
-              <CategoryCard active={category === 'chicken'} color="pink" category='chicken' setCategory={setCategory}>
+              <CategoryCard active={category === 6} color="pink" category={6} setCategory={setCategory}>
                 <Icon src="/icon-chicken.svg" background="pink" />
                 <h4>닭 · 해산물</h4>
               </CategoryCard>

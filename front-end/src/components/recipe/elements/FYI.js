@@ -17,7 +17,7 @@ const Container = styled.div`
 const FYI = ({ fyi, color }) => {
   return (
     <Container color={color}>
-      <div>{fyi}</div>
+      <div>{fyi || '등록된 코멘트가 없어요.'}</div>
     </Container>
   )
 }

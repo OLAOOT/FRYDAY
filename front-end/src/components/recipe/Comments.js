@@ -4,6 +4,7 @@ import CommentIcon from '../elements/CommentIcon'
 import Comment from './elements/Comment'
 import theme from '../../lib/styles/theme'
 import Button from '../elements/Button'
+import axios from 'axios'
 
 const Container = styled.div`
   display: flex;
@@ -40,7 +41,7 @@ const CommentContainer = styled.div`
   }
 `
 
-const InputContainer = styled.div`
+const InputContainer = styled.form`
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -53,11 +54,26 @@ const InputContainer = styled.div`
 
 const Input = styled.input`
   font-size: 24px;
+  width: 800px;
 `
 
-const Comments = ({ color, comment }) => {
+const Comments = ({ color, id, comment, setCommentFlag }) => {
 
   const [input, setInput] = useState('')
+
+  const onSubmit = async (e) => {
+    e.preventDefault()
+    if (input.length === 0) {
+      alert('댓글을 입력하세요.')
+    } else {
+      const { data } = await axios.post('/comment', {
+        post_id: id,
+        text: input,
+        user_id: 10
+      })
+      setCommentFlag(true)
+    }
+  }
 
   return (
     <Container>
@@ -67,10 +83,10 @@ const Comments = ({ color, comment }) => {
       </CommentTitle>
       <CommentContainer>
         {comment.map(comment => (
-          <Comment key={comment} color={color} author={comment.author} comment={comment.comment} />
+          <Comment key={comment.comment_id} color={color} author={comment.user_nickname} comment={comment.texts} />
         ))}
       </CommentContainer>
-      <InputContainer>
+      <InputContainer onSubmit={e => onSubmit(e)}>
           <Input placeholder="댓글 작성" value={input} onChange={e => setInput(e.target.value)} />
           <Button width='120px' background={color}>작성</Button>
       </InputContainer>

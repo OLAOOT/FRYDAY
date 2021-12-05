@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useState } from "react";
+import axios from 'axios'
 import styled from "styled-components";
 
 import SectionHeader from "./elements/SectionHeader";
@@ -111,45 +112,25 @@ const dummy = [
   }
 ]
 
-const processIconAndColor = (recipes, categories) => {
-  recipes.forEach(recipe => {
-    switch (recipe.category_id) {
-      case "": //해산물 닭
-        recipe.iconSrc = "icon-chicken.svg";
-        recipe.color = "pink";
-        break;
-      case "": //과자 스낵
-        recipe.iconSrc = "icon-cookie.svg";
-        recipe.color = "orange";
-        break;
-      case "": //냉동 냉장
-        recipe.iconSrc = "icon-fridge.svg";
-        recipe.color = "blue";
-        break;
-      case "": //야채
-        recipe.iconSrc = "icon-carrot.svg";
-        recipe.color = "green";
-        break;
-      case "": //고기
-        recipe.iconSrc = "icon-steak.svg";
-        recipe.color = "red";
-        break;
-      default: //빵
-        recipe.iconSrc = "icon-toast.svg";
-        recipe.color = "yellow";
-        break;
-    }
-  });
+const iconSrcArr = ['icon-toast.svg', 'icon-cookie.svg', 'icon-carrot.svg', 
+              'icon-fridge.svg', 'icon-steak.svg', 'icon-chicken.svg']
 
-  return recipes;
-}
+const colorArr = ['yellow', 'orange', 'green', 'blue', 'red', 'pink']
+
+const getIconSrc = category => iconSrcArr[category - 1]
+const getColor = category => colorArr[category - 1]
 
 const TrendCards = () => {
   const cardContainerRef = useRef(null)
 
-  const [recipes, setRecipes] = useState(dummy)
+  const [recipes, setRecipes] = useState([])
 
   // processIconAndColor(recipes)
+
+  const getData = async () => {
+    const { data } = await axios.get('/top10')
+    setRecipes(data)
+  }
 
   useEffect(() => {
     const scrollHorizontally = (e) => {
@@ -175,7 +156,9 @@ const TrendCards = () => {
       // IE 6/7/8
       cardContainerRef.current.attachEvent("onmousewheel", scrollHorizontally);
     }
-  });
+
+    getData()
+  }, []);
 
   return (
     <Container>
@@ -186,16 +169,16 @@ const TrendCards = () => {
         </SectionHeader>
       </HeaderContainer>
       <CardContainer ref={cardContainerRef}>
-        {recipes.map((recipe) => (
+        {recipes.length !== 0 && recipes.map((recipe) => (
           <TrendCard
-            id={recipe.id}
-            key={recipe.name}
-            name={recipe.name}
-            iconSrc={recipe.iconSrc}
-            color={recipe.color}
-            author={recipe.author}
-            like={recipe.like}
-            comment={recipe.comment}
+            id={recipe.post_id}
+            key={recipe.post_title}
+            name={recipe.post_title}
+            iconSrc={getIconSrc(recipe.category_id)}
+            color={getColor(recipe.category_id)}
+            author={recipe.user_nickname}
+            like={recipe.likes}
+            comment={recipe.com_count}
           />
         ))}
       </CardContainer>
