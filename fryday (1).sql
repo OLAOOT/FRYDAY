@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3307
--- 생성 시간: 21-12-05 03:36
+-- 생성 시간: 21-12-05 13:41
 -- 서버 버전: 10.4.21-MariaDB
 -- PHP 버전: 7.4.25
 
@@ -81,6 +81,37 @@ INSERT INTO `comment` (`comment_id`, `post_id`, `user_id`, `texts`) VALUES
 -- --------------------------------------------------------
 
 --
+-- 테이블 구조 `likerecipe`
+--
+
+CREATE TABLE `likerecipe` (
+  `id_like` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `post_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- 테이블 구조 `loginlist`
+--
+
+CREATE TABLE `loginlist` (
+  `user_name` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `bool_state` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- 테이블의 덤프 데이터 `loginlist`
+--
+
+INSERT INTO `loginlist` (`user_name`, `bool_state`) VALUES
+('bad', 1),
+('bad', 1);
+
+-- --------------------------------------------------------
+
+--
 -- 테이블 구조 `user`
 --
 
@@ -138,7 +169,7 @@ INSERT INTO `userpost` (`post_id`, `post_title`, `user_id`, `views`, `likes`, `c
 (1, '알감자버터구이', 6, 0, 0, 3, NULL, '원하는 크기대로 썰어서 200도 15분, 다시 흔들어서 200도 15분 돌려주세요.\r\n달궈진 팬에 버터를 넣어주세요.\r\n버터를 녹이고 소금, 후추, 파슬리가루를 취향껏 넣어서 볶아주세요.'),
 (2, '감자칩', 8, 0, 0, 2, NULL, '감자 껍질을 벗기고 2mm정도로 슬라이스해주세요\r\n감자를 물에 담가 전분기를 제거해주세요\r\n물기를 제거한 감자에 올리브유 조금과 소금을 살짝 뿌려주세요.\r\n180도에서 6분, 뒤집어서 3분 튀겨주세요.'),
 (25, '치킨너겟', 3, 0, 0, 6, NULL, '냉동된 치킨너겟을 준비해 주세요.\r\n180도에 15분간 돌려주세요.'),
-(26, '새우튀김', 4, 0, 0, 6, NULL, NULL),
+(26, '새우튀김', 4, 0, 0, 6, NULL, '새우를 손질해주세요\r\n한쪽면에 허브솔트를 뿌려주세요\r\n튀김가루, 계란물, 빵가루 순서대로 묻혀주세요\r\n180도에서 15분 돌려주세요'),
 (27, '호빵', 8, 0, 0, 1, NULL, '호일을 깔고 160도로 예열합니다.\r\n10분간 가열합니다.\r\n뒤집어서 다시 10분간 가열합니다'),
 (28, '찐빵', 10, 0, 0, 1, NULL, '호일을 깔고 160도로 예열합니다.\r\n10분간 가열합니다.\r\n뒤집어서 다시 10분간 가열합니다'),
 (29, '마늘빵', 11, 0, 0, 1, NULL, '200도에서 10분간 예열시켜 주세요.\r\n그릇에 버터와 다진 마늘, 설탕을 넣고 섞어주세요.\r\n식빵 한쪽 면에 버터를 골고루 바르고 파슬리 가루를 뿌려주세요\r\n200도에서 5분간 조리해주세요'),
@@ -169,7 +200,8 @@ INSERT INTO `userpost` (`post_id`, `post_title`, `user_id`, `views`, `likes`, `c
 (56, '깐풍만두', 9, 0, 0, 4, NULL, '냉동만두에 기름을 살짝 발라주세요\r\n종이호일을 깔고 만두를 올려주세요\r\n예열없이 180도에서 10분간 구워주세요\r\n뒤집어서 180도에서 3분간 구워주세요\r\n준비해둔 깐풍소스에 버무려주세요'),
 (57, '로제만두', 9, 0, 0, 4, NULL, '냉동만두에 기름을 살짝 발라주세요\r\n종이호일을 깔고 만두를 올려주세요\r\n예열없이 180도에서 10분간 구워주세요\r\n뒤집어서 180도에서 3분간 구워주세요\r\n준비해둔 로제소스에 버무려주세요'),
 (58, '오지치즈프라이', 7, 0, 0, 2, NULL, '치즈,베이컨,햄을 잘게 썰어주세요\r\n냉동 후렌치후라이를 꺼내 180도에서 10분간 돌려주세요\r\n위에서 손질한 재료들을 넣고 3분간 더 돌려주세요'),
-(59, '웨지감자', 10, 0, 0, 4, NULL, '손질한 감자를 끓는 물에 5분간 삶아주세요\r\n올리브유, 소금, 파슬리감자에 버무려주세요\r\n180도에서 15분 동안 돌려주세요\r\n뒤집어서 7분 더 돌려주세요');
+(59, '웨지감자', 10, 0, 0, 4, NULL, '손질한 감자를 끓는 물에 5분간 삶아주세요\r\n올리브유, 소금, 파슬리감자에 버무려주세요\r\n180도에서 15분 동안 돌려주세요\r\n뒤집어서 7분 더 돌려주세요'),
+(61, '원두볶음', 5, 0, 0, 6, '먹을수없는음식입니다', '원두를간장에볶아주세요');
 
 -- --------------------------------------------------------
 
@@ -226,6 +258,12 @@ ALTER TABLE `comment`
   ADD PRIMARY KEY (`comment_id`);
 
 --
+-- 테이블의 인덱스 `likerecipe`
+--
+ALTER TABLE `likerecipe`
+  ADD PRIMARY KEY (`id_like`);
+
+--
 -- 테이블의 인덱스 `user`
 --
 ALTER TABLE `user`
@@ -266,6 +304,12 @@ ALTER TABLE `comment`
   MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
+-- 테이블의 AUTO_INCREMENT `likerecipe`
+--
+ALTER TABLE `likerecipe`
+  MODIFY `id_like` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- 테이블의 AUTO_INCREMENT `user`
 --
 ALTER TABLE `user`
@@ -275,7 +319,7 @@ ALTER TABLE `user`
 -- 테이블의 AUTO_INCREMENT `userpost`
 --
 ALTER TABLE `userpost`
-  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
