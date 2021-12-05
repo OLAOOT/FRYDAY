@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import styled from 'styled-components'
 import CommentIcon from '../elements/CommentIcon'
 import Comment from './elements/Comment'
 import theme from '../../lib/styles/theme'
 import Button from '../elements/Button'
 import axios from 'axios'
+import { LoginContext } from '../../App'
 
 const Container = styled.div`
   display: flex;
@@ -60,16 +61,20 @@ const Input = styled.input`
 const Comments = ({ color, id, comment, setCommentFlag }) => {
 
   const [input, setInput] = useState('')
+  const { ID } = useContext(LoginContext)
 
   const onSubmit = async (e) => {
     e.preventDefault()
-    if (input.length === 0) {
+    if (!ID) {
+      alert('로그인 후 이용 가능합니다.')
+    } else if (input.length === 0) {
       alert('댓글을 입력하세요.')
     } else {
+      console.log(ID)
       const { data } = await axios.post('/comment', {
         post_id: id,
         text: input,
-        user_id: 10
+        user_id: ID
       })
       setCommentFlag(true)
     }

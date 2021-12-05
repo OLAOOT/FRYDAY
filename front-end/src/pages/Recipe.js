@@ -67,6 +67,7 @@ const Recipe = () => {
   const [contents, setContents] = useState([])
   const [comment, setComment] = useState([])
   const [commentFlag, setCommentFlag] = useState(false)
+  const [likeFlag, setLikeFlag] = useState(false)
 
   const location = useLocation()
   const id = queryString.parse(location.search).id
@@ -92,18 +93,26 @@ const Recipe = () => {
   useEffect(() => {
     getCommentData()
     setCommentFlag(false)
+    setComment('')
   }, [commentFlag])
+
+  useEffect(() => {
+    getData()
+    setLikeFlag(false)
+  }, [likeFlag])
 
   return (
     <Container>
       {comment && (
         <ContentsContainer>
           <RecipeTitle
+            id={id}
             name={recipe.post_title}
             iconSrc={getIconSrc(recipe.category_id)}
             color={getColor(recipe.category_id)}
-            author={recipe.author}
+            author={recipe.user_nickname}
             like={recipe.likes}
+            setLikeFlag={setLikeFlag}
           />
           <RecipeList recipe={contents} color={getColor(recipe.category_id)} />
           <FYI fyi={recipe.post_fyi} color={getColor(recipe.category_id)} />

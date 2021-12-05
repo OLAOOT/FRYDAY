@@ -86,21 +86,29 @@ const Write = () => {
     const [recipe, setRecipe] = useState([''])
     const [FYI, setFYI] = useState('')
 
+    const { ID } = useContext(LoginContext)
+    const navigate = useNavigate()
+    useEffect(() => {
+      if (!ID) {
+        alert('로그인 후 이용 가능합니다.')
+        navigate('/')
+      }
+    }, [])
+
     const onSubmit = async (e) => {
         e.preventDefault()
         if (name.length === 0 || category.length === 0 || recipe.some(e => e.length === 0)) {
           alert('필수 정보를 입력하지 않았습니다.')
         } else {
-          console.log('before')
           const { data } = await axios.post('/recipe', {
             title: name,
-            id: 10,
+            id: ID,
             category: category,
             post_fyi: FYI,
             content: recipe.join('\r\n')
           })
-
-          console.log(data)
+          alert('등록되었습니다.')
+          navigate('/')
         }
     };
     

@@ -1,4 +1,4 @@
-import React, { createContext } from 'react'
+import React, { useState, createContext } from 'react'
 import styled from 'styled-components'
 import { BrowserRouter as Router, Routes, Route, Switch } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
@@ -16,14 +16,14 @@ import SignUp from './pages/SignUp'
 import Write from './pages/Write'
 
 export const LoginContext = createContext({
-  ID: '',
+  ID: 0,
   setID: () => {},
-  PW: '',
-  setPW: () => {},
+  nickname: '',
+  setNickname: () => {},
   success: false,
   setSuccess: () => {},
-  signUpFlag: false,
-  setSignUpFlag: () => {}
+  logFlag: false,
+  setLogFlag: () => {}
 })
 
 const Container = styled.div`
@@ -36,22 +36,30 @@ const Container = styled.div`
 
 
 export default function App() {
+
+  const [ID, setID] = useState(0)
+  const [nickname, setNickname] = useState('')
+  const [success, setSuccess] = useState(false)
+  const [logFlag, setLogFlag] = useState(false)
+
   return (
     <Container>
       <GlobalStyles />
       <ThemeProvider theme={theme}>
-        <Router>
-          <Header />
-          <Routes>
-            <Route exact path='/' element={<Home />} />
-            <Route exact path='/category' element={<Category />} />
-            <Route exact path='/recipe' element={<Recipe />} />
-            <Route exact path='/login' element={<Login />} />
-            <Route exact path='/signup' element={<SignUp />} />
-            <Route exact path='/write' element={<Write />} />
-          </Routes>
-          <Footer />
-        </Router>
+        <LoginContext.Provider value={{ ID, setID, nickname, setNickname, success, setSuccess, logFlag, setLogFlag }}>
+          <Router>
+            <Header />
+            <Routes>
+              <Route exact path='/' element={<Home />} />
+              <Route exact path='/category' element={<Category />} />
+              <Route exact path='/recipe' element={<Recipe />} />
+              <Route exact path='/login' element={<Login />} />
+              <Route exact path='/signup' element={<SignUp />} />
+              <Route exact path='/write' element={<Write />} />
+            </Routes>
+            <Footer />
+          </Router>
+        </LoginContext.Provider>
       </ThemeProvider>
     </Container>
   )

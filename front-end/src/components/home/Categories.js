@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import SectionHeader from "./elements/SectionHeader";
 import CategoryCard from "./elements/CategoryCard";
 import Icon from "../elements/Icon";
+import { LoginContext } from '../../App'
 
 const Container = styled.div`
 	margin: 0 0 22px;
@@ -48,11 +49,15 @@ const ProposeRecipeButton = styled.button`
 
 const Categories = () => {
   
+  const { ID } = useContext(LoginContext)
   const navigate = useNavigate()
 
   const onClickProposeRecipeButton = () => {
-    // 로그인 했다면
-    navigate('/write')
+    if (!ID) {
+      alert('로그인 후 이용 가능합니다.')
+    } else {
+      navigate('/write')
+    }
   };
 
   return (
