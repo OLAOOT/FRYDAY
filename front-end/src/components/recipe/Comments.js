@@ -88,7 +88,7 @@ const Comments = ({ color, id, comment, setCommentFlag }) => {
       </CommentTitle>
       <CommentContainer>
         {comment.map(comment => (
-          <Comment key={comment.comment_id} color={color} author={comment.user_nickname} comment={comment.texts} />
+          <Comment key={comment.comment_id} id={comment.comment_id} color={color} author={comment.user_nickname} comment={comment.texts} setCommentFlag={setCommentFlag} />
         ))}
       </CommentContainer>
       <InputContainer onSubmit={e => onSubmit(e)}>

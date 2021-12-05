@@ -136,7 +136,7 @@ const TrendCards = () => {
     const scrollHorizontally = (e) => {
       e = window.event || e;
       const delta = Math.max(-1, Math.min(1, e.wheelDelta || -e.detail));
-      cardContainerRef.current.scrollLeft -= delta * 30;
+      cardContainerRef.current.scrollLeft -= delta * 60;
       e.preventDefault();
     };
     if (cardContainerRef.current.addEventListener) {

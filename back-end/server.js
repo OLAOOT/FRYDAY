@@ -224,7 +224,7 @@ app.get('/comment/:id', function(request, response) {
 });
 
 //개별 레시피 삭제 DELETE
-app.delete('/recipe/:id', function(request, response) {
+app.post('/recipe/delete/:id', function(request, response) {
     var id = Number(request.param('id'));
 
     client.query('DELETE FROM userpost WHERE post_id=?' , [
@@ -235,7 +235,7 @@ app.delete('/recipe/:id', function(request, response) {
 });
 
 //개별 댓글 삭제 DELETE
-app.delete('/comment/:id', function(request, response) {
+app.post('/comment/delete/:id', function(request, response) {
     var id = Number(request.param('id'));
 
     client.query('DELETE FROM comment WHERE comment_id=?' , [

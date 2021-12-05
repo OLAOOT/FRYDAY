@@ -5,6 +5,7 @@ import styled from "styled-components";
 import SectionHeader from "./elements/SectionHeader";
 import CategoryCard from "./elements/CategoryCard";
 import Icon from "../elements/Icon";
+import Button from '../elements/Button'
 import { LoginContext } from '../../App'
 
 const Container = styled.div`
@@ -38,14 +39,6 @@ const CardContainer = styled.div`
   margin: 16px 0 32px;
 `;
 
-const ProposeRecipeButton = styled.button`
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-  color: ${(props) => props.theme.color.brown};
-  font-size: 18px;
-  margin-left: 16px;
-  white-space: nowrap !important;
-`;
 
 const Categories = () => {
   
@@ -67,9 +60,9 @@ const Categories = () => {
           <h2>카테고리</h2>
           <h4>어떤걸 만들어볼까?</h4>
         </SectionHeader>
-        <ProposeRecipeButton onClick={onClickProposeRecipeButton}>
+        <Button width="200px" background="headerbrown" onClick={onClickProposeRecipeButton}>
           레시피 등록하기
-        </ProposeRecipeButton>
+        </Button>
       </HeaderContainer>
       <CardOuterContainer>
         <CardContainer>

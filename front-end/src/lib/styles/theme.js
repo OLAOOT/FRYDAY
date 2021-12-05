@@ -4,6 +4,7 @@ const color = {
   footerbrown: "#EFE9E9",
   headerbrown: "#FFF9F9",
   lightblack: "#5e5b5b",
+  white: "#fdfdfd",
   black: "#353131",
   yellow: "#ffbe0b",
   orange: "#f88a2c",

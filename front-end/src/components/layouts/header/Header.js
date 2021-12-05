@@ -43,6 +43,7 @@ const User = styled.div`
 
 const Login = styled.div`
   cursor: pointer;
+  font-weight: ${({ theme }) => theme.font.bold};
   -webkit-tap-highlight-color: transparent;
 `
 

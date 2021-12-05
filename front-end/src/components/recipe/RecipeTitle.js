@@ -3,10 +3,12 @@ import styled from "styled-components";
 
 import Title from '../elements/Title';
 import HeartIcon from "../elements/HeartIcon";
+import Button from '../elements/Button'
 
 import theme from '../../lib/styles/theme';
 import { LoginContext } from '../../App'
 import axios from 'axios'
+import { useNavigate } from "react-router";
 
 const Container = styled.div`
   display: flex;
@@ -28,6 +30,7 @@ const DataOuterContainer = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  width: 50%;
   & > *:first-child {
     margin-right: 8px;
   }
@@ -56,7 +59,7 @@ const DataInnerContainer = styled.div`
 const Author = styled.div`
   color: ${(props) => props.theme.color[props.color]};
   font-size: 24px;
-  padding-right: 16px;
+  padding: 0 16px;
 `
 
 const RecipeTitle = ({
@@ -69,24 +72,38 @@ const RecipeTitle = ({
   setLikeFlag
 }) => {
 
-  const { ID } = useContext(LoginContext)
+  const { ID, nickname } = useContext(LoginContext)
+
+  const navigate = useNavigate()
+
+  const handleDelete = async () => {
+    if (window.confirm('삭제하시겠습니까?')) {
+      const { data } = await axios.post(`/recipe/delete/${id}`)
+      alert('삭제되었습니다.')
+      navigate('/')
+    }
+  }
 
   const handleLike = async () => {
-    const { data } = await axios.get(`/likecheck/${ID}`)
-    console.log(data)
-    if (data.length === 0) {
-      // 좋아요
-      const { res } = await axios.get(`/likeadd/${ID}/${id}`)
-      setLikeFlag(true)
+    if (!ID) {
+      alert('로그인 후 이용 가능합니다.')
     } else {
-      if (data.map(e => e.post_id).includes(+id)) {
-        //좋아요 취소
-        const { res } = await axios.get(`/likeminus/${ID}/${id}`)
-        setLikeFlag(true)
-      } else {
+      const { data } = await axios.get(`/likecheck/${ID}`)
+      console.log(data)
+      if (data.length === 0) {
         // 좋아요
         const { res } = await axios.get(`/likeadd/${ID}/${id}`)
         setLikeFlag(true)
+      } else {
+        if (data.map(e => e.post_id).includes(+id)) {
+          //좋아요 취소
+          const { res } = await axios.get(`/likeminus/${ID}/${id}`)
+          setLikeFlag(true)
+        } else {
+          // 좋아요
+          const { res } = await axios.get(`/likeadd/${ID}/${id}`)
+          setLikeFlag(true)
+        }
       }
     }
   }
@@ -95,6 +112,7 @@ const RecipeTitle = ({
     <Container>
       <Title name={name} iconSrc={iconSrc} color={color} />
       <DataOuterContainer color={color}>
+        {author === nickname && (<Button width="80px" onClick={handleDelete}>삭제</Button>)}
         <Author color={color}>{author}</Author>
         <DataInnerContainer onClick={handleLike} color={color}>
           <HeartIcon color={theme.color[color]} />

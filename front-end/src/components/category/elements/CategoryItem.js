@@ -17,13 +17,13 @@ const Container = styled(Link)`
   max-width: 500px;
   height: 82px;
   margin-bottom: 16px;
-  padding: 16px 40px 16px 16px;
+  padding: 16px 32px 16px 16px;
   border-radius: 16px;
   box-shadow: ${props => props.theme.shadow.default};
   background-color: ${(props) =>
     props.theme.background[(props.background ? "" : "light") + props.color]};
   & > h4 {
-    font-size: 28px;
+    font-size: 24px;
     font-weight: ${(props) => props.theme.font.bold};
     color: ${(props) => props.theme.color.black};
   }

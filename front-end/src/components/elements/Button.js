@@ -10,7 +10,7 @@ const Button = styled.button`
   box-shadow: ${({ theme }) => theme.shadow.bottom};
   font-size: 20px;
   font-family: ${({ theme }) => theme.font.light};
-  cursor: ${({ background }) => background === 'headerbrown' ? 'arrow' : 'pointer'};
+  cursor: pointer;
   &:focus {
     outline: none;
   }

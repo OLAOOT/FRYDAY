@@ -240,7 +240,7 @@ const SignUp = () => {
             </CheckButtonContainer>
             <Notice>{checkName}</Notice>
           </InputContainer>
-          <Button type="submit" disabled={!checkSignUp} background={checkSignUp ? 'brown' : 'headerbrown'}>가입하기</Button>
+          <Button type="submit" background={checkSignUp ? 'brown' : 'headerbrown'}>가입하기</Button>
         </Form>
       </Container>
     );
