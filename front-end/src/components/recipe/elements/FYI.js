@@ -14,10 +14,28 @@ const Container = styled.div`
   }
 `;
 
+const ImageContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  & > img {
+    width: 400px;
+  }
+  margin-bottom: 32px;
+`
+
 const FYI = ({ fyi, color }) => {
+
+  const [comment, image] = fyi ? fyi.split('\\img') : [null, null]
+
   return (
     <Container color={color}>
-      <div>{fyi || '등록된 코멘트가 없어요.'}</div>
+      {image && (
+        <ImageContainer>
+          <img alt=' ' src={`/images/${image}`} />
+        </ImageContainer>
+      )}
+      <div>{fyi ? comment : '등록된 사진 및 코멘트가 없습니다.'}</div>
     </Container>
   )
 }

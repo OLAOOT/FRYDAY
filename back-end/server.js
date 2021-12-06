@@ -3,6 +3,8 @@ var express = require('express');
 var mysql = require('mysql');
 var bodyParser = require('body-parser');
 const { response } = require('express');
+const multer = require('multer')
+const moment = require('moment')
 
 var client = mysql.createConnection({
     host: 'localhost',
@@ -339,6 +341,30 @@ app.get('/likecheck/:user_id', function(request, response) {
         response.send(data);
     });
 });
+
+//이미지
+
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, '../front-end/public/images')
+    },
+    filename: (req, file, cb) => {
+        cb(null, moment().format('YYYYMMDDHHmmss') + '_' + Math.floor(Math.random() * 1000000))
+    }
+})
+
+const upload = multer({ storage: storage }).single('file')
+
+app.post('/image', (req, res, next) => {
+    upload(req, res, err => {
+        if (err instanceof multer.MulterError) {
+            return next(err)
+        } else if (err) {
+            return next(err)
+        }
+        return res.json({ imagePath: req.file.filename })
+    })
+})
 
 http.createServer(app).listen(3333, function() {
     console.log('Server Running at http://127.0.0.1:3333');

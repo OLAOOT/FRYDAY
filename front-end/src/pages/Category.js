@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components"
 import { useLocation } from 'react-router-dom'
 import queryString from "query-string"
@@ -56,6 +56,8 @@ const dummy = [
 
 const Category = () => {
   
+  const [filter, setFilter] = useState('')
+
   const location = useLocation()
   const category = categories.find(c => c.id === queryString.parse(location.search).id)
 
@@ -66,8 +68,10 @@ const Category = () => {
           name={category.name}
           iconSrc={category.iconSrc}
           color={category.color}
+          filter={filter}
+          setFilter={setFilter}
         />
-        <CategoryList category={category.name} color={category.color} />
+        <CategoryList category={category.name} color={category.color} filter={filter} />
       </ContentsContainer>
     </Container>
   );
